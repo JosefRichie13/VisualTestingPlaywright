@@ -38,7 +38,7 @@ When('I take the base image of the {string} page', async function(PageType){
             await new Promise(r => setTimeout(() => r(), 2000))
             await driverMethods.TakeScreenshotWithFullPage('./features/images/base_images/SpecificProductPage_BaseImage.png')
             break 
-        case "cart product":
+        case "cart":
             await new Promise(r => setTimeout(() => r(), 2000))
             await driverMethods.TakeScreenshotWithFullPage('./features/images/base_images/CartPage_BaseImage.png')
             break      

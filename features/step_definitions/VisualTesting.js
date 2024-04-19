@@ -38,7 +38,7 @@ When('I verify if the {string} page image matches the base image', async functio
             await new Promise(r => setTimeout(() => r(), 2000))
             assert.equal(visuallyTestTheImages('./features/images/base_images/SpecificProductPage_BaseImage.png', './features/images/test_images/SpecificProductPage_TestImage.png'), 0)
             break 
-        case "cart product":
+        case "cart":
             await new Promise(r => setTimeout(() => r(), 2000))
             await driverMethods.TakeScreenshotWithFullPage('./features/images/test_images/CartPage_TestImage.png')
             await new Promise(r => setTimeout(() => r(), 2000))

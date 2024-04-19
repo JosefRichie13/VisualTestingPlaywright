@@ -12,7 +12,7 @@ Feature: Takes the Base images of all the pages
     And I take the base image of the "specific product" page
     And I add this product to the cart
     And I open the cart page
-    And I take the base image of the "cart product" page
+    And I take the base image of the "cart" page
     And I checkout
     And I take the base image of the "checkout" page    
     And I enter my information to continue
