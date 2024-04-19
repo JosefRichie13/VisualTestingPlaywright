@@ -1,6 +1,6 @@
 # Visual Testing using CucumberJS, Playwright, JavaScript and PixelMatch
 
-This repo has the code which implements Visual Testing using Playwright for the website, https://www.saucedemo.com/. It uses BDD (Cucumber.js) and JavaScript. 
+This repo has the code which implements Visual Testing using Playwright, BDD (Cucumber.js), JavaScript and PixelMatch for the website, https://www.saucedemo.com/.
 
 Visual testing involves verifying whether a webpage is rendered correctly. It’s different from Functional testing as Visual testing ensures that the look of a webpage is not compromised. For example, we have a button in a webpage, if the icon for the button is not loaded functional tests will not catch it as the button works properly, but visual tests will catch it. 
 Visual tests compare the current webpage with an image of an existing image, called a base image, to compare and if there are any differences in the images, it flags it.
