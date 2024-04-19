@@ -1,4 +1,3 @@
-@AutomatedTests
 @BaseImageTaker
 
 Feature: Takes the Base images of all the pages

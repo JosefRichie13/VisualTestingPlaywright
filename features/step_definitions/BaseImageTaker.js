@@ -1,4 +1,4 @@
-const {Given, When, Then} = require('@cucumber/cucumber');
+const {Given, When} = require('@cucumber/cucumber');
 const configs = require('../support/configs.js')
 const selectors = require('../support/selectors.js')
 const driverMethods = require('../support/driver.js')

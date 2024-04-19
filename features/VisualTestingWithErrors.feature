@@ -1,4 +1,4 @@
-@AutomatedTests
+@VisualTests
 @VisualTestsWithErrors
 
 Feature: Verifies if current webpage visually matches the base images
@@ -7,12 +7,12 @@ Feature: Verifies if current webpage visually matches the base images
     Given I open the web page
     Then I verify if the "login" page image matches the base image
 
-  Scenario: Prodcut Page Visual test
+  Scenario: Product Page Visual test
     Given I open the web page
     When I login as a "visual_user" user
     Then I verify if the "product" page image matches the base image
 
-  Scenario: Specific Prodcut Page Visual test
+  Scenario: Specific Product Page Visual test
     Given I open the web page
     When I login as a "visual_user" user
     And I open the page of the first product 
