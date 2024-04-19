@@ -63,7 +63,7 @@ When('I verify if the {string} page image matches the base image', async functio
             assert.equal(visuallyTestTheImages('./features/images/base_images/CheckoutFinishPage_BaseImage.png', './features/images/test_images/CheckoutFinishPage_TestImage.png'), 0)
             break   
         default :
-            throw new Exception("Incorrect Page " + PageType)            
+            throw new Error("Incorrect Page " + PageType)            
     }
 })
 

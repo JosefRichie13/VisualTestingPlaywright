@@ -20,7 +20,7 @@ When('I login as a {string} user', async function(UserType){
             await driverMethods.ClickButton(selectors.LoginButton)
             break            
         default :
-            throw new Exception("Incorrect user type " + UserType)      
+            throw new Error("Incorrect user type " + UserType)      
     }
 })
 
@@ -55,7 +55,7 @@ When('I take the base image of the {string} page', async function(PageType){
             await driverMethods.TakeScreenshotWithFullPage('./features/images/base_images/CheckoutFinishPage_BaseImage.png')
             break   
         default :
-            throw new Exception("Incorrect Page " + PageType)            
+            throw new Error("Incorrect Page " + PageType)            
     }
 })
 
