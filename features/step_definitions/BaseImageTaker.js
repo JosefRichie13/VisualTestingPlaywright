@@ -6,7 +6,9 @@ const jetpack = require("fs-jetpack");
 const AdmZip = require("adm-zip");
 const fs = require('fs')
 
-
+/*
+This function generates a string based on the current timestamp in the format, DDMMMYYY_HHMMSS. For example, 19Apr2024_160934
+*/
 function timeStampGenerator() {
         const today = new Date();
       
@@ -21,11 +23,15 @@ function timeStampGenerator() {
         return `${date}${month}${year}_${hours}${minutes}${seconds}`
 }
 
+/*
+Takes the backup of the current base images and stores it in a ZIP with the current timestamp provided by the timeStampGenerator() function 
+*/
 Given('I take the backup of the existing base images', async function(){
     const backupFileName = timeStampGenerator()
     const sourceFilePath = './features/images/base_images/'
     const backupFilePath = './features/images/base_images/' + backupFileName
 
+    //Moves the existing base images to a new folder by changing its path
     const src = jetpack.cwd(sourceFilePath);
     const dst = jetpack.cwd(backupFilePath);
 
@@ -33,11 +39,13 @@ Given('I take the backup of the existing base images', async function(){
     src.move(filePath, dst.path(filePath));
     });
 
+    //Zip's the created folder
     const zip = new AdmZip()
     const backupZIPFile = backupFilePath+".zip"
     zip.addLocalFolder(backupFilePath)
     zip.writeZip(backupZIPFile)
 
+    //Deletes the created folder once ZIP's done
     fs.rmSync(backupFilePath, { recursive: true, force: true })
 
 })

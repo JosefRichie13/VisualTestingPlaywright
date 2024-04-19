@@ -1,5 +1,6 @@
 @BaseImageTaker
 
+# IMPORTANT : This feature file needs to be run only when there is any intended change in the pages, as it updates the images that we use to compare against.
 Feature: Takes the Base images of all the pages
 
   Background: Take Backup of base images
