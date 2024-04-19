@@ -3,6 +3,9 @@
 
 Feature: Takes the Base images of all the pages
 
+  Background: Take Backup of base images
+    Given I take the backup of the existing base images
+
   Scenario: Valid user login
     Given I open the web page
     And I take the base image of the "login" page

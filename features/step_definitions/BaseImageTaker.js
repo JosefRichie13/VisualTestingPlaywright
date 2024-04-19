@@ -2,6 +2,46 @@ const {Given, When, Then} = require('@cucumber/cucumber');
 const configs = require('../support/configs.js')
 const selectors = require('../support/selectors.js')
 const driverMethods = require('../support/driver.js')
+const jetpack = require("fs-jetpack");
+const AdmZip = require("adm-zip");
+const fs = require('fs')
+
+
+function timeStampGenerator() {
+        const today = new Date();
+      
+        const date = today.getDate().toString().padStart(2, '0')
+        const month = today.toLocaleString('en-US', { month: 'short' })
+        const year = today.getFullYear()
+      
+        const hours = today.getHours().toString().padStart(2, '0')
+        const minutes = today.getMinutes().toString().padStart(2, '0')
+        const seconds = today.getSeconds().toString().padStart(2, '0')
+      
+        return `${date}${month}${year}_${hours}${minutes}${seconds}`
+}
+
+Given('I take the backup of the existing base images', async function(){
+    const backupFileName = timeStampGenerator()
+    const sourceFilePath = './features/images/base_images/'
+    const backupFilePath = './features/images/base_images/' + backupFileName
+
+    const src = jetpack.cwd(sourceFilePath);
+    const dst = jetpack.cwd(backupFilePath);
+
+    src.find({ matching: "*.png" }).forEach(filePath => {
+    src.move(filePath, dst.path(filePath));
+    });
+
+    const zip = new AdmZip()
+    const backupZIPFile = backupFilePath+".zip"
+    zip.addLocalFolder(backupFilePath)
+    zip.writeZip(backupZIPFile)
+
+    fs.rmSync(backupFilePath, { recursive: true, force: true })
+
+})
+
 
 Given('I open the web page', async function(){
     await driverMethods.LoadAUrl(configs.MainURL)
