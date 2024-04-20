@@ -23,6 +23,10 @@ class DriverMethods{
         await page.screenshot({path : path, fullPage: true})
     }
 
+    async TakeScreenshotOfAnElement(element, path){
+        await page.locator(element).screenshot({ path: path })
+    }
+
 }
 
 module.exports = new DriverMethods()

@@ -1,5 +1,6 @@
 const {When} = require('@cucumber/cucumber');
 const driverMethods = require('../support/driver.js')
+const selectors = require('../support/selectors.js')
 const {assert} = require('chai');
 const Pixelmatch = require('pixelmatch');
 const { PNG } = require('pngjs');
@@ -73,3 +74,16 @@ When('I verify if the {string} page image matches the base image', async functio
 })
 
 
+When('I verify if the {string} element image matches the base image', async function(ElementType){
+    switch(ElementType){
+        case "menu item":
+            await new Promise(r => setTimeout(() => r(), 2000))
+            await driverMethods.TakeScreenshotOfAnElement(selectors.MenuItems, './features/images/test_images/MenuItemElement_TestImage.png')
+            await new Promise(r => setTimeout(() => r(), 2000))
+            assert.equal(visuallyTestTheImages('./features/images/base_images/MenuItemElement_BaseImage.png', './features/images/test_images/MenuItemElement_TestImage.png'), 0 , 
+                "Please manually compare the top Base image with the below Current image")
+            break
+        default :
+            throw new Error("Incorrect Page " + PageType)            
+    }
+})

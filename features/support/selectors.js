@@ -6,6 +6,7 @@ class selectors {
     static HomePageTitle = ".app_logo"
     static ErrorMessage = ".error-message-container.error h3"
     static Menu = "#react-burger-menu-btn"
+    static MenuItems = ".bm-item-list"
     static LogoutButton = "#logout_sidebar_link"
     static LoginPageTitle = ".login_logo"
     static ProductList = ".inventory_item_name"

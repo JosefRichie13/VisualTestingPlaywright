@@ -138,3 +138,18 @@ When('I enter my information to continue', async function(table){
 When('I confirm my order', async function(){
     await driverMethods.ClickButton(selectors.FinishButton)
 })
+
+When('I open the side menu', async function(){
+    await driverMethods.ClickButton(selectors.Menu)
+})
+
+When('I take the base image of the {string} element', async function(ElementType){
+    switch(ElementType){
+        case "sidebar":
+            await new Promise(r => setTimeout(() => r(), 2000))
+            await driverMethods.TakeScreenshotOfAnElement(selectors.MenuItems,'./features/images/base_images/MenuItemElement_BaseImage.png')
+            break
+        default :
+            throw new Error("Incorrect Element " + ElementType)            
+    }
+})

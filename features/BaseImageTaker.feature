@@ -1,6 +1,12 @@
 @BaseImageTaker
 
 # IMPORTANT : This feature file needs to be run only when there is any intended change in the pages, as it updates the images that we use to compare against.
+
+# IMPORTANT : Scenario, Base image, Test image names should be the same
+# Scenario name should have "<SCENARIO_NAME> Visual test"
+# If the scenario name is "Menu Item Element Visual test"
+# Base name image should be "MenuItemElement_BaseImage.PNG"
+# Test name image should be "MenuItemElement_TestImage.PNG"
 Feature: Takes the Base images of all the pages
 
   Background: Take Backup of base images
@@ -11,6 +17,8 @@ Feature: Takes the Base images of all the pages
     And I take the base image of the "login" page
     When I login as a "standard" user
     And I take the base image of the "product" page
+    And I open the side menu
+    And I take the base image of the "sidebar" element
     And I open the page of the first product 
     And I take the base image of the "specific product" page
     And I add this product to the cart

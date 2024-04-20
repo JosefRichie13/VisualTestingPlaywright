@@ -1,6 +1,12 @@
 @VisualTests
 @VisualTestsWithErrors
 
+# IMPORTANT : Scenario, Base image, Test image names should be the same
+# Scenario name should have "<SCENARIO_NAME> Visual test"
+# If the scenario name is "Menu Item Element Visual test"
+# Base name image should be "MenuItemElement_BaseImage.PNG"
+# Test name image should be "MenuItemElement_TestImage.PNG" 
+
 Feature: Verifies if current webpage visually matches the base images
 
   Scenario: Login Page Visual test
@@ -59,3 +65,9 @@ Feature: Verifies if current webpage visually matches the base images
        | John      | Doe      | 37188 |    
     And I confirm my order       
     Then I verify if the "checkout finish" page image matches the base image      
+
+  Scenario: Menu Item Element Visual test
+    Given I open the web page
+    When I login as a "visual_user" user
+    And I open the side menu
+    Then I verify if the "menu item" element image matches the base image  
