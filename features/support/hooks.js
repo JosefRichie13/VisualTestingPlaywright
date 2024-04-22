@@ -1,17 +1,17 @@
-const {Before, After} = require('@cucumber/cucumber')
-const { chromium, firefox, webkit, devices } = require('playwright');
-const fs = require('fs');
+import { Before, After } from '@cucumber/cucumber';
+import { chromium, firefox, webkit, devices } from 'playwright';
+import { readFileSync } from 'fs';
 
 // Increases the default timeout to 1 min, default is 30 sec
-var {setDefaultTimeout} = require('@cucumber/cucumber');
+import { setDefaultTimeout } from '@cucumber/cucumber';
 setDefaultTimeout(60 * 1000);
 
 
 Before(async function () {
     //browser = await chromium.launch({headless: false})
-    browser = await chromium.launch({headless: false, channel: 'chrome'}) //-- Launches installed Chrome browser
-    const context = await browser.newContext();
-    page = await context.newPage();
+    global.browser = await chromium.launch({headless: false, channel: 'chrome'}) //-- Launches installed Chrome browser
+    global.context = await browser.newContext();
+    global.page = await context.newPage();
 })
 
 
@@ -29,8 +29,8 @@ After(async function (scenario) {
         var world = this
 
         // Based on this, "CartPage", we get the base64encoding of the images and attach both of them to the report for manual comparison
-        const base64BaseImage = fs.readFileSync('./features/images/base_images/'+scenarioName+'_BaseImage.png')
-        const base64TestImage = fs.readFileSync('./features/images/test_images/'+scenarioName+'_TestImage.png')
+        const base64BaseImage = readFileSync('./features/images/base_images/'+scenarioName+'_BaseImage.png')
+        const base64TestImage = readFileSync('./features/images/test_images/'+scenarioName+'_TestImage.png')
     
         world.attach(Buffer.from(base64BaseImage).toString('base64'), "base64:image/png")
         world.attach(Buffer.from(base64TestImage).toString('base64'), "base64:image/png")

@@ -7,4 +7,4 @@ class configs {
     
 }
 
-module.exports = configs
+export default configs

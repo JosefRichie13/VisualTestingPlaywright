@@ -29,4 +29,4 @@ class DriverMethods{
 
 }
 
-module.exports = new DriverMethods()
+export default new DriverMethods()

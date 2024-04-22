@@ -1,16 +1,16 @@
-const {When} = require('@cucumber/cucumber');
-const driverMethods = require('../support/driver.js')
-const selectors = require('../support/selectors.js')
-const {assert} = require('chai');
-const Pixelmatch = require('pixelmatch');
-const { PNG } = require('pngjs');
-const fs = require('fs');
+import { When } from '@cucumber/cucumber';
+import selectors from '../support/selectors.js';
+import driverMethods from '../support/driver.js';
+import { assert } from 'chai';
+import Pixelmatch from 'pixelmatch';
+import { PNG } from 'pngjs';
+import { readFileSync } from 'fs';
 
 
 function visuallyTestTheImages(baseImage, currentImage){
 
-    const baseImageForComparison = PNG.sync.read(fs.readFileSync(baseImage))
-    const currentImageForComparison = PNG.sync.read(fs.readFileSync(currentImage))
+    const baseImageForComparison = PNG.sync.read(readFileSync(baseImage))
+    const currentImageForComparison = PNG.sync.read(readFileSync(currentImage))
     const { width, height } = baseImageForComparison
     const diff = new PNG({ height, width })
     return Pixelmatch(baseImageForComparison.data, currentImageForComparison.data, diff.data, width, height)

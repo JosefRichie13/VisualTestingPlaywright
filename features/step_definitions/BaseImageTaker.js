@@ -1,10 +1,11 @@
-const {Given, When} = require('@cucumber/cucumber');
-const configs = require('../support/configs.js')
-const selectors = require('../support/selectors.js')
-const driverMethods = require('../support/driver.js')
-const jetpack = require("fs-jetpack");
-const AdmZip = require("adm-zip");
-const fs = require('fs')
+import { Given, When } from '@cucumber/cucumber';
+import configs from '../support/configs.js';
+import selectors from '../support/selectors.js';
+import driverMethods from '../support/driver.js';
+import pkg from 'fs-jetpack';
+const { cwd } = pkg;
+import AdmZip from "adm-zip";
+import { rmSync } from 'fs';
 
 /*
 This function generates a string based on the current timestamp in the format, DDMMMYYY_HHMMSS. For example, 19Apr2024_160934
@@ -31,22 +32,31 @@ Given('I take the backup of the existing base images', async function(){
     const sourceFilePath = './features/images/base_images/'
     const backupFilePath = './features/images/base_images/' + backupFileName
 
-    //Moves the existing base images to a new folder by changing its path
-    const src = jetpack.cwd(sourceFilePath);
-    const dst = jetpack.cwd(backupFilePath);
+    try {
+    
+        //Moves the existing base images to a new folder by changing its path
+        const src = cwd(sourceFilePath);
+        const dst = cwd(backupFilePath);
 
-    src.find({ matching: "*.png" }).forEach(filePath => {
-    src.move(filePath, dst.path(filePath));
-    });
+        src.find({ matching: "*.png" }).forEach(filePath => {
+        src.move(filePath, dst.path(filePath));
+        });
 
-    //Zip's the created folder
-    const zip = new AdmZip()
-    const backupZIPFile = backupFilePath+".zip"
-    zip.addLocalFolder(backupFilePath)
-    zip.writeZip(backupZIPFile)
+        //Zip's the created folder
+        const zip = new AdmZip()
+        const backupZIPFile = backupFilePath+".zip"
+        zip.addLocalFolder(backupFilePath)
+        zip.writeZip(backupZIPFile)
 
-    //Deletes the created folder once ZIP's done
-    fs.rmSync(backupFilePath, { recursive: true, force: true })
+        //Deletes the created folder once ZIP's done
+        rmSync(backupFilePath, { recursive: true, force: true })
+
+    }
+
+    catch (err){
+        // The Try/Catch is handling the error when there is no existing PNG files in the base_images folder
+    }
+
 
 })
 

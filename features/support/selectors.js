@@ -38,4 +38,4 @@ class selectors {
 
 }
 
-module.exports = selectors
+export default selectors
